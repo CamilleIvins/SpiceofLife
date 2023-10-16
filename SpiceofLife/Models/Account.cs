@@ -7,3 +7,8 @@ public class Account
   public string Email { get; set; }
   public string Picture { get; set; }
 }
+
+public class AccountFavouriteViewModel : Account
+{
+  public int RecipeId { get; set; }
+}
