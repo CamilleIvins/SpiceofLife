@@ -97,8 +97,12 @@ public class RecipesController : ControllerBase
     {
         try
         {
-            List<Ingredient> ingredients = _ingredientsService.GetRecipeIngredients(recipeId);
-            return
+            List<Ingredient> ingredients = _ingredientsService.GetIngredientsByRecipe(recipeId);
+            return ingredients;
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
         }
     }
 }

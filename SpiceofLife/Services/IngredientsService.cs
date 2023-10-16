@@ -1,5 +1,6 @@
 
 
+
 namespace SpiceofLife.Services;
 
 public class IngredientsService
@@ -21,4 +22,5 @@ public class IngredientsService
         List<Ingredient> ingredients = _repo.GetIngredientsByRecipe(recipeId);
         return ingredients;
     }
+
 }
