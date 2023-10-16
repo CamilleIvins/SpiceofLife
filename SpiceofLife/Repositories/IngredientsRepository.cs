@@ -35,15 +35,11 @@ public class IngredientsRepository
     {
         string sql = @"
         SELECT
-        ingr.*,
+        *
         FROM ingredients ingr
         WHERE recipeId = @recipeId
         ;";
-        List<Ingredient> ingredients = _db.Query<Ingredient, Account, Ingredient>(sql, (ingredient, account) =>
-        {
-            ingredient.Creator = account;
-            return ingredient;
-        }, new { recipeId }).ToList();
+        List<Ingredient> ingredients = _db.Query<Ingredient>(sql, new { recipeId }).ToList();
         return ingredients;
     }
 }

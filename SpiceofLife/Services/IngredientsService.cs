@@ -1,6 +1,7 @@
 
 
 
+
 namespace SpiceofLife.Services;
 
 public class IngredientsService
@@ -23,4 +24,8 @@ public class IngredientsService
         return ingredients;
     }
 
+    internal void RemoveIngredient(int ingredientId, string userId)
+    {
+        Ingredient ingredient = Get;
+    }
 }
