@@ -8,11 +8,13 @@ public class RecipesController : ControllerBase
 {
     private readonly RecipesService _recipesService;
     private readonly Auth0Provider _auth0;
+    private readonly IngredientsService _ingredientsService;
 
-    public RecipesController(RecipesService recipesService, Auth0Provider auth0)
+    public RecipesController(RecipesService recipesService, Auth0Provider auth0, IngredientsService ingredientsService)
     {
         _recipesService = recipesService;
         _auth0 = auth0;
+        _ingredientsService = ingredientsService;
     }
 
     [Authorize]
@@ -87,6 +89,16 @@ public class RecipesController : ControllerBase
         catch (Exception e)
         {
             return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet("{recipeId}/ingredients")]
+    public ActionResult<List<Ingredient>> GetRecipeIngredients(int recipeId)
+    {
+        try
+        {
+            List<Ingredient> ingredients = _ingredientsService.GetRecipeIngredients(recipeId);
+            return
         }
     }
 }
