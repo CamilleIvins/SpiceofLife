@@ -47,7 +47,7 @@ public class RecipesService
         Recipe recipe = this.Get(recipeId);
         if (recipe.CreatorId != userId) throw new Exception("Unauthorized");
         recipe.Archived = !recipe.Archived;
-        _repo.Delete(recipe);
+        _repo.Delete(recipe.Id);
         return recipe;
         // Recipe archivedRecipe = _repo.Edit(recipe);
         // return archivedRecipe;

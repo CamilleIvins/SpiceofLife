@@ -49,7 +49,7 @@ public class FavoritesController : ControllerBase
         try
         {
             Account userInfo = await _auth0.GetUserInfoAsync<Account>(HttpContext);
-            _favoritesService.RemoveFavorite(favoriteId);
+            _favoritesService.RemoveFavorite(favoriteId, userInfo.Id);
             string message = "Removed from Favourites";
             return message;
         }

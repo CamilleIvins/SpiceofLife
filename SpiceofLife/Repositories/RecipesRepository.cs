@@ -82,14 +82,14 @@ public class RecipesRepository
         return recipe;
     }
 
-    internal void Delete(Recipe recipe)
+    internal void Delete(int id)
     {
         string sql = @"
         DELETE FROM recipes
-        WHERE id = @id;
+        WHERE id = @id
         LIMIT 1
         ;";
-        _db.Execute(sql, recipe);
+        _db.Execute(sql, new { id });
         // string sql = @"
         // UPDATE recipes
         // SET

@@ -15,5 +15,6 @@ public class Recipe
 
 public class RecipeFavouriteViewModel : Recipe
 {
+    public int FavoriteId { get; set; }
     public string AccountId { get; set; }
 }

@@ -8,7 +8,8 @@ public class Account
   public string Picture { get; set; }
 }
 
-public class AccountFavouriteViewModel : Account
+public class AccountFavouritesViewModel : Account
 {
+  public int FavoriteId { get; set; }
   public int RecipeId { get; set; }
 }
