@@ -1,4 +1,6 @@
 
+
+
 namespace SpiceofLife.Repositories;
 
 public class IngredientsRepository
@@ -13,9 +15,9 @@ public class IngredientsRepository
     {
         string sql = @"
         INSERT INTO ingredients
-        (name, quantity, recipeId)
+        (name, quantity, creatorId, recipeId)
         VALUES
-        (@name, @quantity, @recipeId);
+        (@name, @quantity, @creatorId, @recipeId);
         SELECT
         ingr.*
         FROM ingredients ingr
@@ -31,6 +33,24 @@ public class IngredientsRepository
         // return newIngredient;
     }
 
+    internal Ingredient Get(int ingredientId)
+    {
+        string sql = @"
+        SELECT
+        ingr.*,
+        acct.*
+        FROM ingredients ingr
+        JOIN accounts acct ON ingr.creatorId = acct.id
+        WHERE ingr.id = @ingredientId
+        ;";
+        Ingredient foundIngredient = _db.Query<Ingredient, Account, Ingredient>(sql, (ingredient, account) =>
+        {
+            ingredient.Creator = account;
+            return ingredient;
+        }, new { ingredientId }).FirstOrDefault();
+        return foundIngredient;
+    }
+
     internal List<Ingredient> GetIngredientsByRecipe(int recipeId)
     {
         string sql = @"
@@ -41,5 +61,15 @@ public class IngredientsRepository
         ;";
         List<Ingredient> ingredients = _db.Query<Ingredient>(sql, new { recipeId }).ToList();
         return ingredients;
+    }
+
+    internal void RemoveIngredient(int ingredientId)
+    {
+        string sql = @"
+        DELETE FROM ingredients
+        WHERE id = @ingredientId
+        LIMIT 1
+        ;";
+        _db.Execute(sql, new { ingredientId });
     }
 }

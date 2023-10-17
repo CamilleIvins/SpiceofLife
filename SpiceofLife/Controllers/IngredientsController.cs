@@ -34,13 +34,13 @@ public class IngredientsController : ControllerBase
 
     [Authorize]
     [HttpDelete("{ingredientId}")]
-    public async Task<ActionResult<Ingredient>> RemoveIngredient(int ingredientId)
+    public async Task<ActionResult<string>> RemoveIngredient(int ingredientId)
     {
         try
         {
             Account userInfo = await _auth0.GetUserInfoAsync<Account>(HttpContext);
-            _ingredientsService.RemoveIngredient(ingredientId, userInfo.Id);
-            return Ok("This ingredient has been removed");
+            string message = _ingredientsService.RemoveIngredient(ingredientId, userInfo.Id);
+            return Ok(message);
         }
         catch (Exception e)
         {

@@ -37,6 +37,7 @@ public class RecipesService
         original.Category = updateData.Category != null ? updateData.Category : original.Category;
         original.Instructions = updateData.Instructions != null ? updateData.Instructions : original.Instructions;
         original.Img = updateData.Img ?? original.Img;
+        original.Archived = !original.Archived;
         Recipe recipe = _repo.UpdateRecipe(original);
         return recipe;
     }
@@ -46,7 +47,17 @@ public class RecipesService
         Recipe recipe = this.Get(recipeId);
         if (recipe.CreatorId != userId) throw new Exception("Unauthorized");
         recipe.Archived = !recipe.Archived;
-        _repo.Edit(recipe);
+        _repo.Delete(recipe);
         return recipe;
+        // Recipe archivedRecipe = _repo.Edit(recipe);
+        // return archivedRecipe;
     }
+    // internal Recipe ArchiveRecipe(int recipeId, string userId)
+    // {
+    //     Recipe recipe = this.Get(recipeId);
+    //     if (recipe.CreatorId != userId) throw new Exception("Unauthorized");
+    //     recipe.Archived = !recipe.Archived;
+    //     _repo.Edit(recipe);
+    //     return recipe;
+    // }
 }

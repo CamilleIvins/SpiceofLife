@@ -73,7 +73,8 @@ public class RecipesRepository
         category = @category,
         title = @title,
         img = @img,
-        instructions = @instructions
+        instructions = @instructions,
+        archived = @archived
         WHERE id = @id;
         SELECT * FROM recipes WHERE id = @id
         ;";
@@ -81,17 +82,24 @@ public class RecipesRepository
         return recipe;
     }
 
-    internal void Edit(Recipe recipe)
+    internal void Delete(Recipe recipe)
     {
         string sql = @"
-        UPDATE recipes
-        SET
-        category = @category,
-        title = @title,
-        img = @img,
-        instructions = @instructions
+        DELETE FROM recipes
         WHERE id = @id;
+        LIMIT 1
         ;";
         _db.Execute(sql, recipe);
+        // string sql = @"
+        // UPDATE recipes
+        // SET
+        // category = @category,
+        // title = @title,
+        // img = @img,
+        // instructions = @instructions,
+        // archived = @archived
+        // WHERE id = @id;
+        // ;";
+        // _db.Execute(sql, recipe);
     }
 }

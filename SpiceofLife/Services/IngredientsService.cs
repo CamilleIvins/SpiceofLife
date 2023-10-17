@@ -2,6 +2,8 @@
 
 
 
+using System.ComponentModel;
+
 namespace SpiceofLife.Services;
 
 public class IngredientsService
@@ -24,8 +26,18 @@ public class IngredientsService
         return ingredients;
     }
 
-    internal void RemoveIngredient(int ingredientId, string userId)
+    internal Ingredient Get(int ingredientId)
     {
-        Ingredient ingredient = Get;
+        Ingredient foundIngredient = _repo.Get(ingredientId);
+        if (foundIngredient == null) throw new Exception($"Ingredient with ID {ingredientId} is not listed here");
+        return foundIngredient;
+    }
+
+    internal string RemoveIngredient(int ingredientId, string userId)
+    {
+        Ingredient ingredient = this.Get(ingredientId);
+        if (ingredient.CreatorId != userId) throw new Exception("Unauthorized");
+        _repo.RemoveIngredient(ingredientId);
+        return $"Ingredient with ID: {ingredientId} has been removed.";
     }
 }

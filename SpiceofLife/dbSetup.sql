@@ -1,5 +1,5 @@
 CREATE TABLE
-    IF NOT EXISTS account(
+    IF NOT EXISTS accounts (
         id VARCHAR(255) NOT NULL primary key COMMENT 'primary key',
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
@@ -26,6 +26,10 @@ CREATE TABLE
 
 DROP TABLE recipes;
 
+DROP TABLE account;
+
+DROP TABLE ingredients;
+
 -- ingredients table is throwing errors...
 
 CREATE TABLE
@@ -39,23 +43,14 @@ CREATE TABLE
         FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
--- CREATE TABLE
-
---     IF NOT EXISTS favourites(
-
---         id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-
---         name VARCHAR(100) NOT NULL,
-
---         creatorId VARCHAR(255) NOT NULL,
-
---         FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE,
-
---         recipeId VARCHAR(255) NOT NULL,
-
---         FOREIGN KEY (recipeId) REFERENCES recipes(id) ON DELETE CASCADE
-
---     ) default charset utf8 COMMENT '';
+CREATE TABLE
+    IF NOT EXISTS favourites(
+        id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        creatorId VARCHAR(255) NOT NULL,
+        FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE,
+        recipeId VARCHAR(255) NOT NULL,
+        FOREIGN KEY (recipeId) REFERENCES recipes(id) ON DELETE CASCADE
+    ) default charset utf8 COMMENT '';
 
 -- INSERTS
 
