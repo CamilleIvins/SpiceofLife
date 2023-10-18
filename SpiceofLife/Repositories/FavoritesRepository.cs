@@ -1,8 +1,4 @@
 
-
-
-
-
 namespace SpiceofLife.Repositories;
 
 public class FavoritesRepository
