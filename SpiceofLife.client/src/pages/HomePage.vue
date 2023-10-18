@@ -44,5 +44,9 @@ img.banner {
   width: 100%;
   object-fit: cover;
   object-position: center;
+  // elevation-2 settings
+  box-shadow: 0 3px 3px -1px rgba(205, 205, 205, 0.2),
+    0 5px 6px 0 rgba(205, 205, 205, 0.14),
+    0 1px 8px 0 rgba(205, 205, 205, 0.12);
 }
 </style>
