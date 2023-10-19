@@ -1,13 +1,19 @@
 <template>
+  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'
+    integrity='sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD' crossorigin='anonymous'>
   <section class="container-fluid">
     <section class="row">
       <div class="">
         <img class="banner elevation-4"
           src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+        <div class="title fs-1 text-light">
+          Spice of Life
+        </div>
       </div>
     </section>
     <div>
-      <NewRecipeForm />
+      <!-- This causes a load error -->
+      <!-- <NewRecipeForm /> -->
     </div>
     <section class="row my-3 justify-content-around">
       <div v-for="recipe in recipes" :key="recipe.id" class="col-md-4 col-12 px-4">
@@ -48,11 +54,29 @@ export default {
       recipes: computed(() => AppState.recipes),
     };
   },
-  components: { RecipeCard, NewRecipeForm }
+  components: { RecipeCard, }
 }
 </script>
 
 <style scoped lang="scss">
+// REGION style debug section
+.container,
+.container-fluid {
+  outline: 2px double blue;
+  outline-offset: -2px;
+}
+
+.row {
+  outline: 2px dashed red;
+  outline-offset: -2px;
+}
+
+[class*="col-"] {
+  outline: 2px dotted forestgreen;
+  outline-offset: -3px;
+}
+
+// END REGION
 .home {
   display: grid;
   height: 80vh;
@@ -82,6 +106,14 @@ img.banner {
   box-shadow: 0 3px 3px -1px rgba(205, 205, 205, 0.2),
     0 5px 6px 0 rgba(205, 205, 205, 0.14),
     0 1px 8px 0 rgba(205, 205, 205, 0.12);
+}
+
+.title {
+  position: relative;
+  text-align: center;
+  bottom: 50%;
+  filter: drop-shadow(3px 8px 7px #292828);
+
 }
 
 @media screen and (min-width: 768px) {

@@ -29,6 +29,10 @@
                     maxlength="1000" cols="30" rows="10" placeholder="Recipe Instructions"></textarea>
             </div>
 
+
+            <div class="col-12 text-end">
+                <button class="btn text-dark">SUBMIT</button>
+            </div>
         </form>
 
     </div>
